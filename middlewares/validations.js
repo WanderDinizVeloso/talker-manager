@@ -39,3 +39,21 @@ function isRequiredTalk() {
     message: 'O campo talk é obrigatório e watchedAt e rate não podem ser vazios',
   };
 }
+
+const isValidEmail = (req, _res, next) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return next(isRequired('email'));
+  }
+
+  if (!email.includes('@' && '.com')) {
+    return next(isValid('email', 'email@email.com'));
+  }
+
+  next();
+};
+
+module.exports = {
+  isValidEmail,
+}
