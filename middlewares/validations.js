@@ -40,6 +40,22 @@ function isRequiredTalk() {
   };
 }
 
+function checkTalk(param) {
+  const isTalk = !param || !param.watchedAt || !param.rate;
+
+  return !isTalk;
+}
+
+function checkWatchedAt(param) {
+  return /([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4}$/.test(param);
+}
+
+function checkRate(param) {
+  const isRate = param % 1 === 0 && param >= 1 && param <= 5;
+
+  return isRate;
+}
+
 const isValidEmail = (req, _res, next) => {
   const { email } = req.body;
 
@@ -96,10 +112,28 @@ const isValidAge = (req, _res, next) => {
   next();
 };
 
+const isValidTalk = (req, _res, next) => {
+  const { talk } = req.body;
+
+  if (checkTalk(talk) === false) {
+    return next(isRequiredTalk());
+  }
+
+  if (checkRate(talk.rate) === false) {
+    return next(isValid('rate'));
+  }
+
+  if (checkWatchedAt(talk.watchedAt) === false) {
+    return next(isValid('watchedAt', 'dd/mm/aaaa'));
+  }
+
+  next();
+};
 
 module.exports = {
   isValidEmail,
   isValidPassword,
   isValidName,
   isValidAge,
+  isValidTalk,
 };
