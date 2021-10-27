@@ -145,7 +145,7 @@ const isValidTalk = (req, _res, next) => {
 };
 
 const isValidToken = (req, _res, next) => {
-  const { authorization } = req.header;
+  const { authorization } = req.headers;
 
   if (!authorization) {
     return next(isRequired('token'));
