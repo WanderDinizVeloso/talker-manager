@@ -56,4 +56,5 @@ const isValidEmail = (req, _res, next) => {
 
 module.exports = {
   isValidEmail,
+  
 }
