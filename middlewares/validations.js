@@ -72,18 +72,34 @@ const isValidName = (req, _res, next) => {
   const { name } = req.body;
 
   if (!name) {
-    return next(isRequired('password'));
+    return next(isRequired('name'));
   }
 
   if (name.length < 3) {
-    return next(isLength('password', 3));
+    return next(isLength('name', 3));
   }
 
   next();
 };
 
+const isValidAge = (req, _res, next) => {
+  const { age } = req.body;
+
+  if (!age) {
+    return next(isRequired('age'));
+  }
+
+  if (age < 18) {
+    return next(isLegalAge());
+  }
+
+  next();
+};
+
+
 module.exports = {
   isValidEmail,
   isValidPassword,
   isValidName,
+  isValidAge,
 };
