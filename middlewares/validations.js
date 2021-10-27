@@ -1,4 +1,11 @@
 function isRequired(param) {
+  if (param === 'token') {
+    return {
+      status: 401,
+      message: 'Token não encontrado',
+    };
+  }
+
   return {
     status: 400,
     message: `O campo ${param} é obrigatório`,
@@ -19,7 +26,14 @@ function isValid(param, format = null) {
   };
 }
 
-function isLength(param, number) {
+function isLength(param, number = null) {
+  if (param === 'token') {
+    return {
+      status: 401,
+      message: 'Token inválido',
+    };
+  }
+
   return {
     status: 400,
     message: `O ${param} deve ter pelo menos ${number} caracteres`,
@@ -130,10 +144,25 @@ const isValidTalk = (req, _res, next) => {
   next();
 };
 
+const isValidToken = (req, _res, next) => {
+  const { authorization } = req.header;
+
+  if (!authorization) {
+    return next(isRequired('token'));
+  }
+
+  if (authorization.length !== 16) {
+    return next(isLength('token'));
+  }
+
+  next();
+};
+
 module.exports = {
   isValidEmail,
   isValidPassword,
   isValidName,
   isValidAge,
   isValidTalk,
+  isValidToken,
 };
