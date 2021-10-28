@@ -1,5 +1,6 @@
 const express = require('express');
 const talkerRouter = require('./controllers/talker');
+const loginRouter = require('./controllers/login');
 const error = require('./middlewares/error');
 
 const app = express();
@@ -14,6 +15,7 @@ app.get('/', (_request, response) => {
 });
 
 app.use('/talker', talkerRouter);
+app.use('/login', loginRouter);
 
 app.use(error);
 
