@@ -62,7 +62,7 @@ function isRequiredTalk() {
 }
 
 function checkTalk(param) {
-  const isTalk = !param || !param.watchedAt || !param.rate;
+  const isTalk = !param || !param.watchedAt || param.rate === undefined;
 
   return !isTalk;
 }

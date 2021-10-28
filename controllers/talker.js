@@ -94,7 +94,7 @@ router.post('/',
   wrapper(isValidTalk),
   wrapper(addTalker));
 
-router.post('/:id',
+router.put('/:id',
   wrapper(isValidToken),
   wrapper(isValidName),
   wrapper(isValidAge),
