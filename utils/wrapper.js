@@ -1,9 +1,8 @@
 const wrapper = (handler) => async (req, res, next) => {
     try {
-      handler(req, res, next);
-      next();
+      return handler(req, res, next);
     } catch (error) {
-      next(error);
+      return next(error);
     }
 };
 
