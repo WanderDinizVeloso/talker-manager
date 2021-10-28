@@ -20,6 +20,13 @@ function isValid(param, format = null) {
     };
   }
 
+  if (param === 'email') {
+    return {
+      status: 400,
+      message: `O "${param}" deve ter o formato "${format}"`,
+    };
+  }
+
   return {
     status: 400,
     message: `O campo "${param}" deve ter o formato "${format}"`,
