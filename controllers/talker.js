@@ -40,7 +40,6 @@ const findByid = async (req, res, next) => {
 const addTalker = async (req, res, _next) => {
   const { name, age, talk } = req.body;
   const talker = { name, age, talk };
-
   const newFile = await writeFilesAdd(FILE, talker);
 
   return res.status(201).json(newFile);  
@@ -49,9 +48,7 @@ const addTalker = async (req, res, _next) => {
 const editTalkerById = async (req, res, _next) => {
   const { id } = req.params;
   const { name, age, talk } = req.body;
-
   const idNumber = parseInt(id, 10);
-
   const talker = { id: idNumber, name, age, talk };
 
   await writeFilesByIdEdit(FILE, talker);
@@ -70,7 +67,6 @@ const deleteTalkerById = async (req, res, _next) => {
 
 const filterTalkerByName = async (req, res, _next) => {
   const { q } = req.query;
-
   const talkers = await readFiles(FILE);
 
   const filterTalker = talkers
