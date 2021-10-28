@@ -1,7 +1,12 @@
 const express = require('express');
 
 const wrapper = require('../utils/wrapper');
-const { readFiles, writeFilesAdd, writeFilesByIdEdit } = require('../utils/readWriteFile');
+const {
+  readFiles,
+  writeFilesAdd,
+  writeFilesByIdEdit,
+  writeFilesByIdEditDelete,
+} = require('../utils/readWriteFile');
 
 const {
   isValidName,
@@ -55,6 +60,15 @@ const editTalkerById = async (req, res, _next) => {
   return res.status(200).json(talker);
 };
 
+const deleteTalkerById = async (req, res, _next) => {
+  const { id } = req.params;
+  const idNumber = parseInt(id, 10);
+
+  await writeFilesByIdEditDelete(FILE, idNumber);
+
+  return res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
+};
+
 const router = express.Router({ mergeParams: true });
 
 router.get('/', wrapper(find));
@@ -74,5 +88,9 @@ router.post('/:id',
   wrapper(isValidAge),
   wrapper(isValidTalk),
   wrapper(editTalkerById));
+
+router.delete('/:id',
+  wrapper(isValidToken),
+  wrapper(deleteTalkerById));
 
 module.exports = router;
