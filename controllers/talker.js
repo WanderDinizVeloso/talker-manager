@@ -69,9 +69,26 @@ const deleteTalkerById = async (req, res, _next) => {
   return res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
 };
 
+const filterTalkerByName = async (req, res, _next) => {
+  const { q } = req.query;
+
+  const talkers = await readFiles(FILE);
+
+  const filterTalker = talkers
+    .filter((talker) => talker.name
+      .toLowerCase()
+      .includes(q.toLowerCase()));
+ 
+  return res.status(200).json(filterTalker);
+};
+
 const router = express.Router({ mergeParams: true });
 
 router.get('/', wrapper(find));
+
+router.get('/search',
+  wrapper(isValidToken),
+  wrapper(filterTalkerByName));
 
 router.get('/:id', wrapper(findByid));
 
