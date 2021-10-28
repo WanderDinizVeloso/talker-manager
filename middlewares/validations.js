@@ -22,7 +22,7 @@ function isValid(param, format = null) {
 
   return {
     status: 400,
-    message: `O "${param}" deve ter o formato "${format}"`,
+    message: `O campo "${param}" deve ter o formato "${format}"`,
   };
 }
 
@@ -50,7 +50,7 @@ function isLegalAge() {
 function isRequiredTalk() {
   return {
     status: 400,
-    message: 'O campo talk é obrigatório e watchedAt e rate não podem ser vazios',
+    message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios',
   };
 }
 
