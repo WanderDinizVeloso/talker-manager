@@ -8,7 +8,7 @@ function isRequired(param) {
 
   return {
     status: 400,
-    message: `O campo ${param} é obrigatório`,
+    message: `O campo "${param}" é obrigatório`,    
   };
 }
 
@@ -16,13 +16,13 @@ function isValid(param, format = null) {
   if (param === 'rate') {
     return {
       status: 400,
-      message: `O campo ${param} deve ser um inteiro de 1 à 5`,
+      message: `O campo "${param}" deve ser um inteiro de 1 à 5`,
     };
   }
 
   return {
     status: 400,
-    message: `O ${param} deve ter o formato ${format}`,
+    message: `O "${param}" deve ter o formato "${format}"`,
   };
 }
 
@@ -36,7 +36,7 @@ function isLength(param, number = null) {
 
   return {
     status: 400,
-    message: `O ${param} deve ter pelo menos ${number} caracteres`,
+    message: `O "${param}" deve ter pelo menos ${number} caracteres`,
   };
 }
 
