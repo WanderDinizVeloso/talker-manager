@@ -8,7 +8,7 @@ const { isValidPassword, isValidEmail } = require('../middlewares/validations');
 const login = async (_req, res, _next) => {
   const token = generateToken();
 
-  return res.status(200).json({ token: `${token}` });
+  return res.status(200).json({ token });
 };
 
 const router = express.Router({ mergeParams: true });
