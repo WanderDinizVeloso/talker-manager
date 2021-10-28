@@ -7,7 +7,6 @@ const {
   writeFilesByIdEdit,
   writeFilesByIdEditDelete,
 } = require('../utils/readWriteFile');
-
 const {
   isValidName,
   isValidAge,
