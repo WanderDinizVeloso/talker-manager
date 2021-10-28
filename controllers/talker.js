@@ -1,7 +1,7 @@
 const express = require('express');
 
 const wrapper = require('../utils/wrapper');
-const { readFiles, writeFiles } = require('../utils/readWriteFile');
+const { readFiles, writeFilesAdd, writeFilesByIdEdit } = require('../utils/readWriteFile');
 
 const {
   isValidName,
@@ -37,20 +37,42 @@ const addTalker = async (req, res, _next) => {
   const { name, age, talk } = req.body;
   const talker = { name, age, talk };
 
-  const newFile = await writeFiles(FILE, talker);
+  const newFile = await writeFilesAdd(FILE, talker);
 
   return res.status(201).json(newFile);  
+};
+
+const editTalkerById = async (req, res, _next) => {
+  const { id } = req.params;
+  const { name, age, talk } = req.body;
+
+  const idNumber = parseInt(id, 10);
+
+  const talker = { id: idNumber, name, age, talk };
+
+  await writeFilesByIdEdit(FILE, talker);
+
+  return res.status(200).json(talker);
 };
 
 const router = express.Router({ mergeParams: true });
 
 router.get('/', wrapper(find));
+
 router.get('/:id', wrapper(findByid));
+
 router.post('/',
   wrapper(isValidToken),
   wrapper(isValidName),
   wrapper(isValidAge),
   wrapper(isValidTalk),
   wrapper(addTalker));
+
+router.post('/:id',
+  wrapper(isValidToken),
+  wrapper(isValidName),
+  wrapper(isValidAge),
+  wrapper(isValidTalk),
+  wrapper(editTalkerById));
 
 module.exports = router;
