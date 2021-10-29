@@ -2,7 +2,7 @@ const { promises: { writeFile } } = require('fs');
 
 const readFiles = require('./readFiles');
 
-const writeFilesByIdEditDelete = async (file, id) => {
+const writeFilesByIdDelete = async (file, id) => {
   try {
     const readContentFile = await readFiles(file);
     const newFile = readContentFile.filter((talker) => talker.id !== id);
@@ -15,4 +15,4 @@ const writeFilesByIdEditDelete = async (file, id) => {
   }
 };
 
-module.exports = writeFilesByIdEditDelete;
+module.exports = writeFilesByIdDelete;

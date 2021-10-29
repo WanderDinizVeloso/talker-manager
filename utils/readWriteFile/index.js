@@ -1,11 +1,11 @@
 const readFiles = require('./readFiles');
 const writeFilesAdd = require('./writeFileAdd');
 const writeFilesByIdEdit = require('./writeFileByIdEdit');
-const writeFilesByIdEditDelete = require('./writeFilesByIdEditDelete');
+const writeFilesByIdDelete = require('./writeFilesByIdDelete');
 
 module.exports = {
   readFiles,
   writeFilesAdd,
   writeFilesByIdEdit,
-  writeFilesByIdEditDelete,
+  writeFilesByIdDelete,
 };
