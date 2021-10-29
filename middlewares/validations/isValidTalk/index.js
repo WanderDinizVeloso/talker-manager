@@ -10,15 +10,15 @@ const checkWatchedAt = require('./checkWatchedAt');
 const isValidTalk = (req, _res, next) => {
   const { talk } = req.body;
 
-  if (checkTalk(talk) === false) {
+  if (!checkTalk(talk)) {
     return next(isRequired('talk'));
   }
 
-  if (checkRate(talk.rate) === false) {
+  if (!checkRate(talk.rate)) {
     return next(isValid('rate'));
   }
 
-  if (checkWatchedAt(talk.watchedAt) === false) {
+  if (!checkWatchedAt(talk.watchedAt)) {
     return next(isValid('watchedAt', 'dd/mm/aaaa'));
   }
 
