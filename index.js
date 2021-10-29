@@ -1,9 +1,12 @@
 const express = require('express');
-const talkerRouter = require('./controllers/talker');
-const loginRouter = require('./controllers/login');
+
 const error = require('./middlewares/error');
 
+const talkerRouter = require('./controllers/talker');
+const loginRouter = require('./controllers/login');
+
 const app = express();
+
 app.use(express.json());
 
 const HTTP_OK_STATUS = 200;
@@ -16,7 +19,6 @@ app.get('/', (_request, response) => {
 
 app.use('/talker', talkerRouter);
 app.use('/login', loginRouter);
-
 app.use(error);
 
 app.listen(PORT, () => {
